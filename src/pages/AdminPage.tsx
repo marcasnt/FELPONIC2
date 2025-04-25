@@ -120,7 +120,7 @@ function AdminPage() {
   if (!user) {
     // Simple login form
     return (
-      <div className="max-w-md mx-auto mt-20 p-8 bg-black/70 rounded-xl text-white">
+      <div className="max-w-md mx-auto mt-24 bg-black/90 rounded-lg shadow-xl p-8 z-50 relative">
         <h2 className="text-2xl font-bold mb-4">Panel Admin FELPONIC</h2>
         <button onClick={loginWithGoogle} className="bg-blue-600 rounded px-4 py-2 mb-4 w-full">Entrar con Google</button>
         <form onSubmit={e => { e.preventDefault(); loginWithEmail(e.target.email.value, e.target.password.value); }} className="space-y-3">
