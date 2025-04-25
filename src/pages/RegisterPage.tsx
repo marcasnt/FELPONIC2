@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Check } from 'lucide-react';
+import CustomSelect from '../components/CustomSelect';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -18,12 +19,34 @@ const RegisterPage = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
     const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
-    
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
   };
+
+  // Para CustomSelect
+  const handleCustomSelect = (name: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Opciones para los selects profesionales
+  const genderOptions = [
+    { value: '', label: 'Selecciona una opción', disabled: true },
+    { value: 'male', label: 'Masculino' },
+    { value: 'female', label: 'Femenino' },
+    { value: 'other', label: 'Otro' }
+  ];
+  const experienceOptions = [
+    { value: '', label: 'Selecciona una opción', disabled: true },
+    { value: 'beginner', label: 'Principiante (0-1 año)' },
+    { value: 'intermediate', label: 'Intermedio (1-3 años)' },
+    { value: 'advanced', label: 'Avanzado (3-5 años)' },
+    { value: 'expert', label: 'Experto (5+ años)' }
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,22 +150,14 @@ const RegisterPage = () => {
             </div>
             
             <div>
-              <label htmlFor="gender" className="block text-white mb-2">
-                Género
-              </label>
-              <select
-                id="gender"
+              <CustomSelect
+                label="Género"
                 name="gender"
                 value={formData.gender}
-                onChange={handleChange}
+                onChange={(value) => handleCustomSelect('gender', value)}
+                options={genderOptions}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
-              >
-                <option value="" disabled hidden>Selecciona una opción</option>
-                <option value="male">Masculino</option>
-                <option value="female">Femenino</option>
-                <option value="other">Otro</option>
-              </select>
+              />
             </div>
             
             <div>
@@ -163,23 +178,14 @@ const RegisterPage = () => {
             </div>
             
             <div>
-              <label htmlFor="experience" className="block text-white mb-2">
-                Experiencia en Powerlifting
-              </label>
-              <select
-                id="experience"
+              <CustomSelect
+                label="Experiencia en Powerlifting"
                 name="experience"
                 value={formData.experience}
-                onChange={handleChange}
+                onChange={(value) => handleCustomSelect('experience', value)}
+                options={experienceOptions}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
-              >
-                <option value="" disabled hidden>Selecciona una opción</option>
-                <option value="beginner">Principiante (0-1 año)</option>
-                <option value="intermediate">Intermedio (1-3 años)</option>
-                <option value="advanced">Avanzado (3-5 años)</option>
-                <option value="expert">Experto (5+ años)</option>
-              </select>
+              />
             </div>
           </div>
           
