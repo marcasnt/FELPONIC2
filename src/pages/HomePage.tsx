@@ -1,5 +1,9 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import WhoWeAreSection from '../components/WhoWeAreSection';
+import UpcomingEventsSection from '../components/UpcomingEventsSection';
+import HomeCTASection from '../components/HomeCTASection';
+import GallerySection from '../components/GallerySection';
 
 const HomePage = () => {
   return (
@@ -34,6 +38,11 @@ const HomePage = () => {
           <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
         </Link>
       </div>
+      {/* Secciones adicionales */}
+      <WhoWeAreSection />
+      <UpcomingEventsSection />
+      <HomeCTASection />
+      <GallerySection />
     </div>
   );
 };
