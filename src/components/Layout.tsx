@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import BackgroundPattern from './BackgroundPattern';
+import Footer from './Footer';
 
 const Layout = () => {
   return (
@@ -10,6 +11,7 @@ const Layout = () => {
       <main id="main-content">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 };
