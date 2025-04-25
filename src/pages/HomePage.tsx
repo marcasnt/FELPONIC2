@@ -8,7 +8,7 @@ const HomePage = () => {
         {/* Logo Hero */}
         <div className="w-64 md:w-96 mb-12 animate-fadeIn">
           <img
-            src="/logo2.png"
+            src={`${import.meta.env.BASE_URL}logo2.png`}
             alt="FELPONIC - Federación de Levantamiento de Potencia de Nicaragua"
             className="w-full h-auto animate-slideUp"
             style={{maxWidth: '320px', margin: '0 auto'}}
