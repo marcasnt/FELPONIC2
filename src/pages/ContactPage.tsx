@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import CustomSelect from '../components/CustomSelect';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,24 @@ const ContactPage = () => {
       [name]: value
     }));
   };
+
+  // Para CustomSelect
+  const handleCustomSelect = (name: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Opciones para el select profesional de asunto
+  const subjectOptions = [
+    { value: '', label: 'Selecciona un asunto', disabled: true },
+    { value: 'Información General', label: 'Información General' },
+    { value: 'Membresía', label: 'Membresía' },
+    { value: 'Eventos', label: 'Eventos' },
+    { value: 'Patrocinios', label: 'Patrocinios' },
+    { value: 'Otro', label: 'Otro' }
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,24 +140,14 @@ const ContactPage = () => {
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-white mb-2">
-                  Asunto
-                </label>
-                <select
-                  id="subject"
+                <CustomSelect
+                  label="Asunto"
                   name="subject"
                   value={formData.subject}
-                  onChange={handleChange}
+                  onChange={(value) => handleCustomSelect('subject', value)}
+                  options={subjectOptions}
                   required
-                  className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
-                >
-                  <option value="">Selecciona un asunto</option>
-                  <option value="Información General">Información General</option>
-                  <option value="Membresía">Membresía</option>
-                  <option value="Eventos">Eventos</option>
-                  <option value="Patrocinios">Patrocinios</option>
-                  <option value="Otro">Otro</option>
-                </select>
+                />
               </div>
               
               <div>
