@@ -3,9 +3,24 @@ import { Link } from 'react-router-dom';
 import WhoWeAreSection from '../components/WhoWeAreSection';
 import UpcomingEventsSection from '../components/UpcomingEventsSection';
 import HomeCTASection from '../components/HomeCTASection';
+import { useEffect } from 'react';
 import GallerySection from '../components/GallerySection';
 
+const scrollToTopOnNavigate = () => {
+  useEffect(() => {
+    const handleClick = () => {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 0);
+    };
+    const btns = document.querySelectorAll('.scroll-top-link');
+    btns.forEach(btn => btn.addEventListener('click', handleClick));
+    return () => btns.forEach(btn => btn.removeEventListener('click', handleClick));
+  }, []);
+};
+
 const HomePage = () => {
+  scrollToTopOnNavigate();
   return (
     <div className="container mx-auto px-4 pt-8 pb-20">
       <div className="flex flex-col items-center justify-center text-center">
@@ -32,17 +47,19 @@ const HomePage = () => {
         {/* Call to Action Button */}
         <Link 
           to="/registro" 
-          className="group bg-[#FF0000] hover:bg-[#FF3300] text-white text-xl font-bold py-4 px-16 rounded-full transition-all duration-300 transform hover:scale-105 animate-fadeIn animation-delay-400 flex items-center"
+          className="scroll-top-link group bg-[#FF0000] hover:bg-[#FF3300] text-white text-xl font-bold py-4 px-16 rounded-full transition-all duration-300 transform hover:scale-105 animate-fadeIn animation-delay-400 flex items-center"
         >
           Únete Ahora
           <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
         </Link>
       </div>
       {/* Secciones adicionales */}
-      <WhoWeAreSection />
-      <UpcomingEventsSection />
-      <HomeCTASection />
-      <GallerySection />
+      <div className="mt-64 md:mt-80">
+        <WhoWeAreSection />
+        <UpcomingEventsSection />
+        <HomeCTASection />
+        <GallerySection />
+      </div>
     </div>
   );
 };
