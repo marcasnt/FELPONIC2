@@ -62,7 +62,7 @@ const RegisterPage = () => {
                 value={formData.firstName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
               />
             </div>
             
@@ -77,7 +77,7 @@ const RegisterPage = () => {
                 value={formData.lastName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
               />
             </div>
             
@@ -92,7 +92,7 @@ const RegisterPage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
               />
             </div>
             
@@ -107,7 +107,7 @@ const RegisterPage = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
               />
             </div>
             
@@ -122,7 +122,7 @@ const RegisterPage = () => {
                 value={formData.birthdate}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
               />
             </div>
             
@@ -136,9 +136,9 @@ const RegisterPage = () => {
                 value={formData.gender}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
               >
-                <option value="">Selecciona una opción</option>
+                <option value="" disabled hidden>Selecciona una opción</option>
                 <option value="male">Masculino</option>
                 <option value="female">Femenino</option>
                 <option value="other">Otro</option>
@@ -158,7 +158,7 @@ const RegisterPage = () => {
                 required
                 min="30"
                 max="200"
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
               />
             </div>
             
@@ -172,9 +172,9 @@ const RegisterPage = () => {
                 value={formData.experience}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
               >
-                <option value="">Selecciona una opción</option>
+                <option value="" disabled hidden>Selecciona una opción</option>
                 <option value="beginner">Principiante (0-1 año)</option>
                 <option value="intermediate">Intermedio (1-3 años)</option>
                 <option value="advanced">Avanzado (3-5 años)</option>
@@ -193,7 +193,7 @@ const RegisterPage = () => {
               name="gym"
               value={formData.gym}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
+              className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
               placeholder="Opcional"
             />
           </div>
