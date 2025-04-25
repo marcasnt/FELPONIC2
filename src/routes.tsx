@@ -6,6 +6,7 @@ import EventsPage from './pages/EventsPage';
 import GalleryPage from './pages/GalleryPage';
 import ContactPage from './pages/ContactPage';
 import RegisterPage from './pages/RegisterPage';
+import AdminPage from './pages/AdminPage';
 
 export default function AppRoutes() {
   return (
@@ -18,6 +19,7 @@ export default function AppRoutes() {
           <Route path="galeria" element={<GalleryPage />} />
           <Route path="contacto" element={<ContactPage />} />
           <Route path="registro" element={<RegisterPage />} />
+        <Route path="admin" element={<AdminPage />} />
         </Route>
       </Routes>
     </HashRouter>
