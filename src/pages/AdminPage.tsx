@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import type { User } from 'firebase/auth';
 import { app } from '../firebaseConfig';
 import {
   getAuth,
@@ -13,7 +14,6 @@ import {
   collection,
   addDoc,
   getDocs,
-  updateDoc,
   deleteDoc,
   doc
 } from 'firebase/firestore';
@@ -31,11 +31,15 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 function AdminPage() {
-  const [user, setUser] = useState(null);
-  const [events, setEvents] = useState([]);
-  const [gallery, setGallery] = useState([]);
+  type Event = { id: string; title: string; date: string; location: string; description: string };
+type GalleryImage = { name: string; url: string };
+
+
+  const [user, setUser] = useState<User | null>(null);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [gallery, setGallery] = useState<GalleryImage[]>([]);
   const [eventForm, setEventForm] = useState({ title: '', date: '', location: '', description: '' });
-  const [imageFile, setImageFile] = useState(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -51,7 +55,16 @@ function AdminPage() {
   useEffect(() => {
     if (user) {
       getDocs(collection(db, 'events')).then(snapshot => {
-        setEvents(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        setEvents(snapshot.docs.map(doc => {
+  const data = doc.data();
+  return {
+    id: doc.id,
+    title: data.title || '',
+    date: data.date || '',
+    location: data.location || '',
+    description: data.description || ''
+  };
+}));
       });
       listAll(ref(storage, 'gallery')).then(res => {
         Promise.all(res.items.map(itemRef =>
@@ -67,7 +80,7 @@ function AdminPage() {
     await signInWithPopup(auth, provider);
   };
 
-  const loginWithEmail = async (email, password) => {
+  const loginWithEmail = async (email: string, password: string) => {
     setLoading(true);
     setError('');
     try {
@@ -84,23 +97,32 @@ function AdminPage() {
   };
 
   // Add Event
-  const handleAddEvent = async (e) => {
+  const handleAddEvent = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await addDoc(collection(db, 'events'), eventForm);
     setEventForm({ title: '', date: '', location: '', description: '' });
     // Refresh events
     const snapshot = await getDocs(collection(db, 'events'));
-    setEvents(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    setEvents(snapshot.docs.map(doc => {
+  const data = doc.data();
+  return {
+    id: doc.id,
+    title: data.title || '',
+    date: data.date || '',
+    location: data.location || '',
+    description: data.description || ''
+  };
+}));
   };
 
   // Delete Event
-  const handleDeleteEvent = async (id) => {
+  const handleDeleteEvent = async (id: string) => {
     await deleteDoc(doc(db, 'events', id));
     setEvents(events.filter(ev => ev.id !== id));
   };
 
   // Upload Image
-  const handleUploadImage = async (e) => {
+  const handleUploadImage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!imageFile) return;
     const storageRef = ref(storage, `gallery/${imageFile.name}`);
@@ -111,7 +133,7 @@ function AdminPage() {
   };
 
   // Delete Image
-  const handleDeleteImage = async (name) => {
+  const handleDeleteImage = async (name: string) => {
     const imageRef = ref(storage, `gallery/${name}`);
     await deleteObject(imageRef);
     setGallery(gallery.filter(img => img.name !== name));
@@ -123,7 +145,11 @@ function AdminPage() {
       <div className="max-w-md mx-auto mt-24 bg-black/90 rounded-lg shadow-xl p-8 z-50 relative">
         <h2 className="text-2xl font-bold mb-4">Panel Admin FELPONIC</h2>
         <button onClick={loginWithGoogle} className="bg-blue-600 rounded px-4 py-2 mb-4 w-full">Entrar con Google</button>
-        <form onSubmit={e => { e.preventDefault(); loginWithEmail(e.target.email.value, e.target.password.value); }} className="space-y-3">
+        <form onSubmit={e => {
+  e.preventDefault();
+  const target = e.target as typeof e.target & { email: { value: string }; password: { value: string } };
+  loginWithEmail(target.email.value, target.password.value);
+}} className="space-y-3">
           <input name="email" type="email" placeholder="Correo" className="w-full px-3 py-2 rounded" required />
           <input name="password" type="password" placeholder="Contraseña" className="w-full px-3 py-2 rounded" required />
           <button type="submit" className="bg-yellow-500 rounded px-4 py-2 w-full" disabled={loading}>Entrar</button>
@@ -158,7 +184,7 @@ function AdminPage() {
       <div>
         <h3 className="text-xl font-bold mb-2">Galería</h3>
         <form onSubmit={handleUploadImage} className="flex gap-2 mb-4">
-          <input type="file" accept="image/*" onChange={e => setImageFile(e.target.files[0])} className="text-black" required />
+          <input type="file" accept="image/*" onChange={e => setImageFile(e.target.files ? e.target.files[0] : null)} className="text-black" required />
           <button type="submit" className="bg-blue-600 px-4 py-2 rounded">Subir Imagen</button>
         </form>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
