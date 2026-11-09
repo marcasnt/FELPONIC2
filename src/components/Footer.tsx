@@ -9,10 +9,10 @@ export default function Footer() {
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
             <img src={import.meta.env.BASE_URL + 'fenilepo.png'} alt="Escudo de FENILEPO" width="1358" height="1233" className="h-12 w-auto" />
-            <span className="text-2xl font-bold text-[#FFCC00]">FELPONIC</span>
+            <span className="text-2xl font-bold text-[#FFCC00]">FENILEPO</span>
           </div>
           <p className="text-gray-400 text-sm">
-            Federación de Levantamiento de Potencia de Nicaragua. Promoviendo el powerlifting y el desarrollo deportivo en el país.
+            Federación Nicaragüense de Levantamiento de Potencia. Promoviendo el powerlifting y el desarrollo deportivo en el país.
           </p>
         </div>
         {/* Columna 2: Contacto */}
@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="text-center text-xs text-white/70 py-4 border-t border-white/10">
-        &copy; {new Date().getFullYear()} FELPONIC. Todos los derechos reservados.
+        &copy; {new Date().getFullYear()} FENILEPO. Todos los derechos reservados.
       </div>
     </footer>
   );

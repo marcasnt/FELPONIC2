@@ -10,7 +10,7 @@ export default function HomePage() {
     <section className="home-platform">
       <div className="relative z-10">
         <h1 className="home-headline">Powerlifting<br />en Nicaragua</h1>
-        <p className="page-intro max-w-[40ch]">Federación de Levantamiento de Potencia de Nicaragua. Consulta las competencias y descubre cómo participar.</p>
+        <p className="page-intro max-w-[40ch]">Federación Nicaragüense de Levantamiento de Potencia. Consulta las competencias y descubre cómo participar.</p>
         <div className="mt-7 flex flex-wrap gap-3">
           <Link to="/eventos" className="action action-primary"><CalendarDays size={19} aria-hidden /> Ver calendario</Link>
           <Link to="/registro" className="action action-secondary">Registro de atletas</Link>

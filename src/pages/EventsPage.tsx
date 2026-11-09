@@ -13,13 +13,13 @@ export default function EventsPage() {
   return <div className="page-shell">
     <header className="page-header">
       <h1 className="page-title">Competencias</h1>
-      <p className="page-intro">Consulta las convocatorias y el archivo de competencias de FELPONIC.</p>
+      <p className="page-intro">Consulta las convocatorias y el archivo de competencias de FENILEPO.</p>
     </header>
     <section>
       <h2 className="section-title">Próximas competencias</h2>
       {upcoming.length > 0 ? <EventList events={upcoming} upcoming /> : <div className="info-panel">
         <p>Por ahora no hay próximas competencias confirmadas.</p>
-        <Link className="text-link mt-2 inline-flex min-h-11 items-center" to="/contacto">Consultar con FELPONIC</Link>
+        <Link className="text-link mt-2 inline-flex min-h-11 items-center" to="/contacto">Consultar con FENILEPO</Link>
       </div>}
     </section>
     {past.length > 0 && <section className="mt-10">

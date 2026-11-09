@@ -10,7 +10,7 @@ export default function WhoWeAreSection() {
   return <section className="home-section grid gap-6 lg:grid-cols-[2fr_3fr] lg:gap-12">
     <div>
       <h2 className="section-title">Quiénes somos</h2>
-      <p className="max-w-prose text-white/80">En FELPONIC promovemos el powerlifting y fortalecemos la comunidad del levantamiento de potencia en Nicaragua.</p>
+      <p className="max-w-prose text-white/80">En FENILEPO promovemos el powerlifting y fortalecemos la comunidad del levantamiento de potencia en Nicaragua.</p>
       <Link to="/acerca-de" className="text-link mt-3 inline-flex min-h-11 items-center">Conocer la federación</Link>
     </div>
     <dl className="divide-y divide-white/15">

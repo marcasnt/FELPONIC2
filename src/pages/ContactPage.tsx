@@ -4,7 +4,7 @@ export default function ContactPage() {
   return <div className="page-shell">
     <header className="page-header">
       <h1 className="page-title">Contacto</h1>
-      <p className="page-intro">Consulta con FELPONIC sobre afiliación, competencias y actividades de la federación.</p>
+      <p className="page-intro">Consulta con FENILEPO sobre afiliación, competencias y actividades de la federación.</p>
     </header>
     <div className="grid gap-6 md:grid-cols-[3fr_2fr]">
       <section className="info-panel">
