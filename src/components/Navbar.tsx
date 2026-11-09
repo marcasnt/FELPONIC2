@@ -11,7 +11,7 @@ export default function Navbar() {
     <nav aria-label="Principal" className="relative mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 px-5 py-2 sm:px-8"
       onKeyDown={event => { if (open && event.key === 'Escape') { setOpen(false); event.currentTarget.querySelector('button')?.focus(); } }}>
       <Link to="/" onClick={() => setOpen(false)} className="inline-flex min-h-11 items-center gap-2 text-xl font-extrabold tracking-tight text-brand-gold">
-        <img src={`${import.meta.env.BASE_URL}logo2.png`} width="34" height="34" className="size-[34px] object-contain" alt="" />
+        <img src={`${import.meta.env.BASE_URL}fenilepo.png`} width="34" height="34" className="size-[34px] object-contain" alt="" />
         FELPONIC
       </Link>
       <button type="button" className="grid size-11 place-items-center rounded-lg hover:bg-white/10 md:hidden" onClick={() => setOpen(!open)}

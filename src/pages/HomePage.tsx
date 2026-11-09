@@ -17,7 +17,7 @@ export default function HomePage() {
         </div>
       </div>
       <div className="platform-emblem">
-        <img src={`${import.meta.env.BASE_URL}logo2.png`} alt="Escudo de FELPONIC" className="hero-crest h-auto w-44 md:w-64 lg:w-72" fetchPriority="high" />
+        <img src={`${import.meta.env.BASE_URL}fenilepo.png`} alt="Escudo de FENILEPO" width="1358" height="1233" className="hero-crest h-auto w-44 md:w-64 lg:w-72" fetchPriority="high" />
       </div>
     </section>
     <UpcomingEventsSection />
