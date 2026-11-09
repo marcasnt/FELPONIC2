@@ -57,10 +57,10 @@ const RegisterPage = () => {
       <div className="max-w-4xl mx-auto bg-black/30 p-6 md:p-8 rounded-xl">
         <div className="text-white mb-8">
           <h2 className="text-2xl font-bold mb-4">Únete a FELPONIC</h2>
-          <p className="text-white/80">
+          {available && <p className="text-white/80">
             Completa el siguiente formulario para registrarte como atleta en la Federación de Levantamiento
             de Potencia de Nicaragua. La solicitud se enviará a la federación para su revisión.
-          </p>
+          </p>}
         </div>
         
         {available ? <form onSubmit={handleSubmit} aria-busy={pending} className="space-y-6">

@@ -96,7 +96,7 @@ const ContactPage = () => {
           
           {/* Contact Form */}
           <div className="bg-black/30 p-6 md:p-8 rounded-xl">
-            <h2 className="text-2xl font-bold text-white mb-6">Envíanos un Mensaje</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">{available ? 'Envíanos un mensaje' : 'Escríbenos por correo'}</h2>
             
             {available ? <form onSubmit={handleSubmit} aria-busy={pending} className="space-y-4">
               <div>
