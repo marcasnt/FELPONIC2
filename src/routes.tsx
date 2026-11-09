@@ -19,8 +19,22 @@ export default function AppRoutes() {
           <Route path="contacto" element={<ContactPage />} />
           <Route path="registro" element={<RegisterPage />} />
 
-          <Route path="admin" element={<div className="page-shell"><h1 className="page-title">Administración</h1><p className="page-intro">El calendario y la galería se actualizan desde el repositorio del sitio.</p><a className="text-link mt-5 inline-block" href="https://github.com/marcasnt/FELPONIC2">Abrir repositorio</a></div>} />
-          <Route path="*" element={<div className="page-shell"><h1 className="page-title">Página no encontrada</h1><Link className="text-link mt-5 inline-block" to="/">Volver al inicio</Link></div>} />
+          <Route path="admin" element={
+            <div className="page-shell">
+              <header className="page-header"><h1 className="page-title">Administración</h1></header>
+              <section className="info-panel max-w-2xl">
+                <h2 className="section-title">Actualizar contenido</h2>
+                <p>El calendario y la galería se actualizan desde el repositorio del sitio.</p>
+                <a className="action action-secondary mt-5" href="https://github.com/marcasnt/FELPONIC2">Abrir repositorio</a>
+              </section>
+            </div>
+          } />
+          <Route path="*" element={
+            <div className="page-shell">
+              <header className="page-header"><h1 className="page-title">Página no encontrada</h1></header>
+              <Link className="action action-secondary" to="/">Volver al inicio</Link>
+            </div>
+          } />
         </Route>
       </Routes>
     </HashRouter>

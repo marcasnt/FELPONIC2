@@ -1,20 +1,40 @@
+import { Link } from 'react-router-dom';
 import EventList from '../components/EventList';
 import { isCalendarDate, today } from '../data/publicContent';
-import { events as data } from '../data/eventsData';
+import { events } from '../data/eventsData';
 
 export default function EventsPage() {
   const date = today();
-  const dated = data.filter(event => isCalendarDate(event.date));
+  const dated = events.filter(event => isCalendarDate(event.date)).sort((a, b) => a.date.localeCompare(b.date));
   const upcoming = dated.filter(event => event.date >= date);
   const past = dated.filter(event => event.date < date).reverse();
+  const undated = events.filter(event => !isCalendarDate(event.date));
+
   return <div className="page-shell">
-    <h1 className="page-title">Competencias</h1>
-    <p className="page-intro">Consulta el calendario y las convocatorias de FELPONIC.</p>
-    <section className="mt-10">
+    <header className="page-header">
+      <h1 className="page-title">Competencias</h1>
+      <p className="page-intro">Consulta las convocatorias y el archivo de competencias de FELPONIC.</p>
+    </header>
+    <section>
       <h2 className="section-title">Próximas competencias</h2>
-      {(upcoming.length ? <EventList events={upcoming} upcoming /> : <p className="text-white/80">Por ahora no hay próximas competencias confirmadas.</p>)}
+      {upcoming.length > 0 ? <EventList events={upcoming} upcoming /> : <div className="info-panel">
+        <p>Por ahora no hay próximas competencias confirmadas.</p>
+        <Link className="text-link mt-2 inline-flex min-h-11 items-center" to="/contacto">Consultar con FELPONIC</Link>
+      </div>}
     </section>
-    {past.length > 0 && <section className="mt-14"><h2 className="section-title">Competencias anteriores</h2><EventList events={past} upcoming={false} /></section>}
-    {data.some(event => !dated.includes(event)) && <section className="mt-14"><h2 className="section-title">Archivo de competencias</h2><ul className="divide-y divide-white/15">{data.filter(event => !dated.includes(event)).map(event => <li key={event.id} className="py-4"><h3 className="font-semibold">{event.title}</h3><p className="text-white/80">{event.date} · {event.location}</p><p className="mt-2 text-white/80">{event.description}</p></li>)}</ul></section>}
+    {past.length > 0 && <section className="mt-10">
+      <h2 className="section-title">Competencias anteriores</h2>
+      <EventList events={past} upcoming={false} />
+    </section>}
+    {undated.length > 0 && <section className="mt-10">
+      <h2 className="section-title">Archivo de competencias</h2>
+      <ul className="divide-y divide-white/15">
+        {undated.map(event => <li key={event.id} className="py-4">
+          <h3 className="font-semibold">{event.title}</h3>
+          <p className="text-white/80">{event.date} · {event.location}</p>
+          <p className="mt-2 text-white/80">{event.description}</p>
+        </li>)}
+      </ul>
+    </section>}
   </div>;
 }

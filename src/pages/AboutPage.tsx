@@ -4,12 +4,12 @@ import { Award, Users, Calendar, Trophy } from 'lucide-react';
 const AboutPage = () => {
   return (
     <div className="page-shell">
+      <header className="page-header">
+        <h1 className="page-title">Acerca de FELPONIC</h1>
+        <p className="page-intro">Federación de Levantamiento de Potencia de Nicaragua.</p>
+      </header>
       <div className="max-w-4xl">
-        <h1 className="page-title mb-8">
-          Acerca de FELPONIC
-        </h1>
-        
-        <div className="bg-black/30 p-6 md:p-8 rounded-xl text-white mb-12">
+        <div className="max-w-prose text-white/[.85] mb-10">
           <p className="text-lg mb-6">
             La Federación de Levantamiento de Potencia de Nicaragua (FELPONIC) es la organización 
             deportiva dedicada a promover, desarrollar y regular el deporte de powerlifting en todo 
@@ -27,9 +27,9 @@ const AboutPage = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-black/30 p-6 rounded-xl flex flex-col items-center text-center">
-            <Award size={48} className="text-[#FFCC00] mb-4" />
+        <div className="grid gap-x-8 gap-y-5 md:grid-cols-2">
+          <div className="border-t border-white/15 pt-4">
+            <Award size={24} className="text-brand-gold mb-3" aria-hidden />
             <h2 className="text-xl font-bold text-white mb-2">Nuestra Misión</h2>
             <p className="text-white/80">
               Promover el desarrollo del powerlifting en Nicaragua, fomentando la competencia 
@@ -37,8 +37,8 @@ const AboutPage = () => {
             </p>
           </div>
           
-          <div className="bg-black/30 p-6 rounded-xl flex flex-col items-center text-center">
-            <Trophy size={48} className="text-[#FFCC00] mb-4" />
+          <div className="border-t border-white/15 pt-4">
+            <Trophy size={24} className="text-brand-gold mb-3" aria-hidden />
             <h2 className="text-xl font-bold text-white mb-2">Nuestra Visión</h2>
             <p className="text-white/80">
               Ser reconocidos internacionalmente por la excelencia de nuestros atletas y 
@@ -46,8 +46,8 @@ const AboutPage = () => {
             </p>
           </div>
           
-          <div className="bg-black/30 p-6 rounded-xl flex flex-col items-center text-center">
-            <Users size={48} className="text-[#FFCC00] mb-4" />
+          <div className="border-t border-white/15 pt-4">
+            <Users size={24} className="text-brand-gold mb-3" aria-hidden />
             <h2 className="text-xl font-bold text-white mb-2">Nuestro Equipo</h2>
             <p className="text-white/80">
               Formado por profesionales apasionados, entrenadores certificados y atletas experimentados 
@@ -55,8 +55,8 @@ const AboutPage = () => {
             </p>
           </div>
           
-          <div className="bg-black/30 p-6 rounded-xl flex flex-col items-center text-center">
-            <Calendar size={48} className="text-[#FFCC00] mb-4" />
+          <div className="border-t border-white/15 pt-4">
+            <Calendar size={24} className="text-brand-gold mb-3" aria-hidden />
             <h2 className="text-xl font-bold text-white mb-2">Historia</h2>
             <p className="text-white/80">
               Desde nuestra fundación, hemos trabajado para elevar el estándar del powerlifting 

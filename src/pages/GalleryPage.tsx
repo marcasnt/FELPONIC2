@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { type Photo } from '../data/publicContent';
 import { photos as data } from '../data/galleryData';
 
@@ -8,15 +9,22 @@ export default function GalleryPage() {
   const [selected, setSelected] = useState<Photo | null>(null);
   const albums = [...new Set(data.map(photo => photo.album))];
   return <div className="page-shell">
-    <h1 className="page-title">Galería de fotos</h1>
-    <p className="page-intro">Imágenes publicadas por FELPONIC.</p>
-    {!data.length && <p className="mt-10 text-white/80">Aún no hay álbumes publicados.</p>}
+    <header className="page-header">
+      <h1 className="page-title">Galería de fotos</h1>
+      <p className="page-intro">Álbumes de competencias y actividades de FELPONIC.</p>
+    </header>
+    {!data.length && <section className="info-panel max-w-2xl">
+      <h2 className="section-title">Aún no hay álbumes publicados</h2>
+      <p>Consulta el calendario para ver las competencias de la federación.</p>
+      <Link to="/eventos" className="text-link mt-2 inline-flex min-h-11 items-center">Ver calendario</Link>
+    </section>}
     {albums.map(album => <section className="mt-10" key={album}>
       <h2 className="section-title">{album}</h2>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{data.filter(photo => photo.album === album).map(photo => <li key={photo.url}>
         <button className="block w-full overflow-hidden rounded-lg text-left" onClick={() => setSelected(photo)} aria-label={`Ampliar foto: ${photo.name}`}>
           <img src={photo.url} alt={photo.name} loading="lazy" className="aspect-[4/3] w-full object-cover" />
         </button>
+        <p className="mt-2 break-words text-sm text-white/80">{photo.name}</p>
       </li>)}</ul>
     </section>)}
     <Dialog open={selected !== null} onClose={() => setSelected(null)} className="relative z-[60]">
