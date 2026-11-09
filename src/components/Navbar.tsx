@@ -18,7 +18,7 @@ export default function Navbar() {
         aria-label={open ? 'Cerrar menú' : 'Abrir menú'} aria-controls="site-navigation" aria-expanded={open}>
         {open ? <X aria-hidden /> : <Menu aria-hidden />}
       </button>
-      <div id="site-navigation" className={`${open ? 'flex' : 'hidden'} basis-full flex-col gap-1 border-t border-white/15 pb-2 pt-2 md:flex md:basis-auto md:flex-row md:items-center md:border-0 md:p-0`}>
+      <div id="site-navigation" className={`${open ? 'is-open flex' : 'hidden'} basis-full flex-col gap-1 border-t border-white/15 pb-2 pt-2 md:flex md:basis-auto md:flex-row md:items-center md:border-0 md:p-0`}>
         {links.map(([path, label]) => <NavLink key={path} to={path} end className={navClass} onClick={() => setOpen(false)}>{label}</NavLink>)}
         <NavLink to="/registro" className="action action-primary md:ml-2" onClick={() => setOpen(false)}>Registro</NavLink>
       </div>
