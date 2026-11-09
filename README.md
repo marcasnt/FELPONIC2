@@ -16,8 +16,11 @@ Este proyecto es una aplicación web construida con React, TypeScript, Vite y Ta
 - `npm run build` – Build de producción
 - `npm run lint` – Linter
 
-## Variables de entorno
-Crea un archivo `.env` en la raíz basado en `.env.example`.
+## Actualizar el sitio
+- Calendario: edita `src/data/eventsData.ts` con fechas YYYY-MM-DD. Usa un enlace HTTPS de la convocatoria solo mientras la inscripción esté abierta.
+- Galería: agrega fotos oficiales en `public/` y regístralas en `src/data/galleryData.ts` con álbum, descripción y URL basada en `import.meta.env.BASE_URL`.
+- Registro y contacto: el sitio dirige a los canales de FELPONIC y no recopila datos personales.
+- Publicación: abre un PR para revisar la vista previa de Vercel antes de fusionar.
 
 ## Licencia
 MIT

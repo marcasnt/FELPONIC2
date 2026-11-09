@@ -1,18 +1,16 @@
 import { useState } from 'react';
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { X } from 'lucide-react';
-import { loadPhotos, usePublicContent, type Photo } from '../data/publicContent';
+import { type Photo } from '../data/publicContent';
+import { photos as data } from '../data/galleryData';
 
 export default function GalleryPage() {
-  const { data, status } = usePublicContent(loadPhotos);
   const [selected, setSelected] = useState<Photo | null>(null);
   const albums = [...new Set(data.map(photo => photo.album))];
   return <div className="page-shell">
     <h1 className="page-title">Galería de fotos</h1>
     <p className="page-intro">Imágenes publicadas por FELPONIC.</p>
-    {status === 'loading' && <p role="status" className="mt-10">Cargando fotos…</p>}
-    {status === 'error' && <p role="status" className="mt-10">No pudimos cargar las fotos. Intenta de nuevo más tarde.</p>}
-    {status === 'ready' && !data.length && <p className="mt-10 text-white/80">Aún no hay álbumes publicados.</p>}
+    {!data.length && <p className="mt-10 text-white/80">Aún no hay álbumes publicados.</p>}
     {albums.map(album => <section className="mt-10" key={album}>
       <h2 className="section-title">{album}</h2>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{data.filter(photo => photo.album === album).map(photo => <li key={photo.url}>
