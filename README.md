@@ -1,5 +1,5 @@
-# FELPONIC2
-FEDERACION DE LEVANTAMIENTO DE POTENCIA DE NICARAGUA
+# FENILEPO
+Federación Nicaragüense de Levantamiento de Potencia
 
 Este proyecto es una aplicación web construida con React, TypeScript, Vite y TailwindCSS.
 
@@ -19,7 +19,7 @@ Este proyecto es una aplicación web construida con React, TypeScript, Vite y Ta
 ## Actualizar el sitio
 - Calendario: edita `src/data/eventsData.ts` con fechas YYYY-MM-DD. Usa un enlace HTTPS de la convocatoria solo mientras la inscripción esté abierta.
 - Galería: agrega fotos oficiales en `public/` y regístralas en `src/data/galleryData.ts` con álbum, descripción y URL basada en `import.meta.env.BASE_URL`.
-- Registro y contacto: el sitio dirige a los canales de FELPONIC y no recopila datos personales.
+- Registro y contacto: el sitio dirige a los canales de FENILEPO y no recopila datos personales.
 - Publicación: abre un PR para revisar la vista previa de Vercel antes de fusionar.
 
 ## Licencia

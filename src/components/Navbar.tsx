@@ -12,7 +12,7 @@ export default function Navbar() {
       onKeyDown={event => { if (open && event.key === 'Escape') { setOpen(false); event.currentTarget.querySelector('button')?.focus(); } }}>
       <Link to="/" onClick={() => setOpen(false)} className="inline-flex min-h-11 items-center gap-2 text-xl font-extrabold tracking-tight text-brand-gold">
         <img src={`${import.meta.env.BASE_URL}fenilepo.png`} width="34" height="34" className="size-[34px] object-contain" alt="" />
-        FELPONIC
+        FENILEPO
       </Link>
       <button type="button" className="grid size-11 place-items-center rounded-lg hover:bg-white/10 md:hidden" onClick={() => setOpen(!open)}
         aria-label={open ? 'Cerrar menú' : 'Abrir menú'} aria-controls="site-navigation" aria-expanded={open}>

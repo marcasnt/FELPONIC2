@@ -11,7 +11,7 @@ export default function GalleryPage() {
   return <div className="page-shell">
     <header className="page-header">
       <h1 className="page-title">Galería de fotos</h1>
-      <p className="page-intro">Álbumes de competencias y actividades de FELPONIC.</p>
+      <p className="page-intro">Álbumes de competencias y actividades de FENILEPO.</p>
     </header>
     {!data.length && <section className="info-panel max-w-2xl">
       <h2 className="section-title">Aún no hay álbumes publicados</h2>
