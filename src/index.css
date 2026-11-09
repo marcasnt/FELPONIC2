@@ -18,7 +18,21 @@
   .action-primary { @apply bg-brand-red text-white hover:bg-[#aa1823]; }
   .action-secondary { @apply border border-brand-gold/60 text-brand-gold hover:bg-brand-gold/10; }
   .text-link { @apply font-semibold text-brand-gold underline underline-offset-4; }
-  .field { @apply min-h-11 w-full min-w-0 rounded-lg border border-white/30 bg-[#161e30] px-3 py-2 text-base text-white; }
+  .home-platform { @apply relative grid items-center gap-5 border-b border-white/15 pb-8 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] md:gap-3 md:pb-12; }
+  .home-headline {
+    color: var(--brand-gold);
+    font-size: clamp(2.4rem, 7vw, 5.75rem);
+    font-weight: 900;
+    letter-spacing: -.045em;
+    line-height: .98;
+  }
+  .platform-emblem {
+    @apply relative grid aspect-[2/1] w-full max-w-96 place-items-center justify-self-center md:max-w-none;
+    isolation: isolate;
+  }
+  .platform-bar { @apply absolute inset-0 h-full w-full text-brand-gold/30; }
+  .home-section { @apply mt-8 border-t border-white/15 pt-8 md:mt-12 md:pt-10; }
+  .action { @apply active:translate-y-px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

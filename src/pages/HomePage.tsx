@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+import { CalendarDays } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import WhoWeAreSection from '../components/WhoWeAreSection';
 import UpcomingEventsSection from '../components/UpcomingEventsSection';
@@ -7,16 +7,23 @@ import GallerySection from '../components/GallerySection';
 
 export default function HomePage() {
   return <div className="page-shell">
-    <section className="grid items-center gap-8 border-b border-white/15 pb-12 md:grid-cols-[1fr_auto] md:gap-16 md:pb-16">
-      <div>
-        <h1 className="page-title max-w-[16ch]">Powerlifting en Nicaragua</h1>
-        <p className="page-intro">Federación de Levantamiento de Potencia de Nicaragua. Consulta el calendario y encuentra cómo participar.</p>
+    <section className="home-platform">
+      <div className="relative z-10">
+        <h1 className="home-headline">Powerlifting<br />en Nicaragua</h1>
+        <p className="page-intro max-w-[40ch]">Federación de Levantamiento de Potencia de Nicaragua. Consulta las competencias y descubre cómo participar.</p>
         <div className="mt-7 flex flex-wrap gap-3">
-          <Link to="/eventos" className="action action-primary">Ver próximas competencias <ArrowRight size={18} aria-hidden /></Link>
-          <Link to="/registro" className="action action-secondary">Registrarme como atleta</Link>
+          <Link to="/eventos" className="action action-primary"><CalendarDays size={19} aria-hidden /> Ver calendario</Link>
+          <Link to="/registro" className="action action-secondary">Registro de atletas</Link>
         </div>
       </div>
-      <img src={`${import.meta.env.BASE_URL}logo2.png`} alt="Escudo de FELPONIC" className="row-start-1 w-28 md:col-start-2 md:row-start-auto md:w-56" fetchPriority="high" />
+      <div className="platform-emblem">
+        <svg className="platform-bar" viewBox="0 0 460 230" fill="none" aria-hidden="true">
+          <path d="M8 115h444" stroke="currentColor" strokeWidth="3" />
+          <path d="M49 64v102m12-121v140m15-156v172m335-137v102m-12-121v140m-15-156v172" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+          <path d="M98 115h264" stroke="currentColor" strokeWidth="1" strokeDasharray="3 7" />
+        </svg>
+        <img src={`${import.meta.env.BASE_URL}logo2.png`} alt="Escudo de FELPONIC" className="relative w-[48%] max-w-60" fetchPriority="high" />
+      </div>
     </section>
     <UpcomingEventsSection />
     <WhoWeAreSection />
