@@ -8,7 +8,7 @@ export default function Footer() {
         {/* Columna 1: Logo y breve */}
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
-            <img src={import.meta.env.BASE_URL + 'logo.png'} alt="FELPONIC Logo" className="h-12 w-auto" />
+            <img src={import.meta.env.BASE_URL + 'fenilepo.png'} alt="Escudo de FENILEPO" width="1358" height="1233" className="h-12 w-auto" />
             <span className="text-2xl font-bold text-[#FFCC00]">FELPONIC</span>
           </div>
           <p className="text-gray-400 text-sm">
