@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, Link } from 'react-router-dom';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -6,7 +6,6 @@ import EventsPage from './pages/EventsPage';
 import GalleryPage from './pages/GalleryPage';
 import ContactPage from './pages/ContactPage';
 import RegisterPage from './pages/RegisterPage';
-import AdminPage from './pages/AdminPage';
 
 export default function AppRoutes() {
   return (
@@ -19,7 +18,23 @@ export default function AppRoutes() {
           <Route path="galeria" element={<GalleryPage />} />
           <Route path="contacto" element={<ContactPage />} />
           <Route path="registro" element={<RegisterPage />} />
-        <Route path="admin" element={<AdminPage />} />
+
+          <Route path="admin" element={
+            <div className="page-shell">
+              <header className="page-header"><h1 className="page-title">Administración</h1></header>
+              <section className="info-panel max-w-2xl">
+                <h2 className="section-title">Actualizar contenido</h2>
+                <p>El calendario y la galería se actualizan desde el repositorio del sitio.</p>
+                <a className="action action-secondary mt-5" href="https://github.com/marcasnt/FELPONIC2">Abrir repositorio</a>
+              </section>
+            </div>
+          } />
+          <Route path="*" element={
+            <div className="page-shell">
+              <header className="page-header"><h1 className="page-title">Página no encontrada</h1></header>
+              <Link className="action action-secondary" to="/">Volver al inicio</Link>
+            </div>
+          } />
         </Route>
       </Routes>
     </HashRouter>

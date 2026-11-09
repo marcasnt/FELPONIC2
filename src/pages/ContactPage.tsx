@@ -1,183 +1,42 @@
-import { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import CustomSelect from '../components/CustomSelect';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
-const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  // Para CustomSelect
-  const handleCustomSelect = (name: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  // Opciones para el select profesional de asunto
-  const subjectOptions = [
-    { value: '', label: 'Selecciona un asunto', disabled: true },
-    { value: 'Información General', label: 'Información General' },
-    { value: 'Membresía', label: 'Membresía' },
-    { value: 'Eventos', label: 'Eventos' },
-    { value: 'Patrocinios', label: 'Patrocinios' },
-    { value: 'Otro', label: 'Otro' }
-  ];
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real implementation, this would send the form data to a backend
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
-    // Show success message (would be implemented with a proper notification system)
-    alert('Mensaje enviado correctamente. Nos pondremos en contacto pronto.');
-  };
-
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#FFCC00] text-center">
-        Contacto
-      </h1>
-
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div className="text-white">
-            <h2 className="text-2xl font-bold mb-6">Información de Contacto</h2>
-            
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <MapPin size={24} className="text-[#FF0000] mr-4 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="text-lg font-semibold mb-1">Dirección</h3>
-                  <p className="text-white/80">
-                    Av. Bolívar, Edificio Central Deportivo<br />
-                    Managua, Nicaragua
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <Phone size={24} className="text-[#FF0000] mr-4 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="text-lg font-semibold mb-1">Teléfono</h3>
-                  <p className="text-white/80">+505 2222-3333</p>
-                  <p className="text-white/80">+505 8888-9999 (WhatsApp)</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <Mail size={24} className="text-[#FF0000] mr-4 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="text-lg font-semibold mb-1">Email</h3>
-                  <p className="text-white/80">info@felponic.org.ni</p>
-                  <p className="text-white/80">contacto@felponic.org.ni</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-12">
-              <h3 className="text-xl font-bold mb-4">Horario de Atención</h3>
-              <ul className="space-y-2 text-white/80">
-                <li>Lunes a Viernes: 8:00 AM - 5:00 PM</li>
-                <li>Sábados: 9:00 AM - 1:00 PM</li>
-                <li>Domingos: Cerrado</li>
-              </ul>
+export default function ContactPage() {
+  return <div className="page-shell">
+    <header className="page-header">
+      <h1 className="page-title">Contacto</h1>
+      <p className="page-intro">Consulta con FELPONIC sobre afiliación, competencias y actividades de la federación.</p>
+    </header>
+    <div className="grid gap-6 md:grid-cols-[3fr_2fr]">
+      <section className="info-panel">
+        <h2 className="section-title">Canales de atención</h2>
+        <div className="divide-y divide-white/15">
+          <div className="flex gap-3 pb-4">
+            <Mail className="mt-1 shrink-0 text-brand-gold" size={20} aria-hidden />
+            <div className="min-w-0">
+              <h3 className="font-semibold">Correo electrónico</h3>
+              <a className="text-link flex min-h-11 items-center break-all" href="mailto:info@felponic.org.ni">info@felponic.org.ni</a>
+              <a className="text-link flex min-h-11 items-center break-all" href="mailto:contacto@felponic.org.ni">contacto@felponic.org.ni</a>
             </div>
           </div>
-          
-          {/* Contact Form */}
-          <div className="bg-black/30 backdrop-blur-sm p-6 md:p-8 rounded-xl">
-            <h2 className="text-2xl font-bold text-white mb-6">Envíanos un Mensaje</h2>
-            
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-white mb-2">
-                  Nombre Completo
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-white mb-2">
-                  Correo Electrónico
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors"
-                />
-              </div>
-              
-              <div>
-                <CustomSelect
-                  label="Asunto"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={(value) => handleCustomSelect('subject', value)}
-                  options={subjectOptions}
-                  required
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-white mb-2">
-                  Mensaje
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-white focus:outline-none focus:border-[#FFCC00] transition-colors resize-none"
-                ></textarea>
-              </div>
-              
-              <button
-                type="submit"
-                className="bg-gradient-to-r from-[#FF0000] to-[#FF3300] text-white font-bold py-3 px-6 rounded hover:from-[#FF3300] hover:to-[#FF0000] transition-all duration-300 flex items-center justify-center"
-              >
-                Enviar Mensaje
-                <Send size={18} className="ml-2" />
-              </button>
-            </form>
+          <div className="flex gap-3 pt-4">
+            <Phone className="mt-1 shrink-0 text-brand-gold" size={20} aria-hidden />
+            <div>
+              <h3 className="font-semibold">Teléfono</h3>
+              <a className="text-link flex min-h-11 items-center" href="tel:+50522223333">+505 2222-3333</a>
+              <p>WhatsApp: +505 8888-9999</p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+      <section className="info-panel">
+        <h2 className="section-title">Dirección y horario</h2>
+        <p className="flex items-start gap-2"><MapPin size={20} className="mt-0.5 shrink-0 text-brand-gold" aria-hidden /> Av. Bolívar, Edificio Central Deportivo, Managua, Nicaragua</p>
+        <dl className="mt-4 divide-y divide-white/15 text-sm">
+          {[['Lunes a viernes', '8:00 a. m. a 5:00 p. m.'], ['Sábado', '9:00 a. m. a 1:00 p. m.'], ['Domingo', 'Cerrado']].map(([day, hours]) =>
+            <div key={day} className="flex flex-wrap justify-between gap-x-3 gap-y-1 py-3"><dt className="font-semibold">{day}</dt><dd className="text-white/80">{hours}</dd></div>
+          )}
+        </dl>
+      </section>
     </div>
-  );
-};
-
-export default ContactPage;
+  </div>;
+}

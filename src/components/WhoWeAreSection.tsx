@@ -1,24 +1,23 @@
+import { Link } from 'react-router-dom';
+
+const principles = [
+  ['Misión', 'Formar atletas íntegros, promover valores y elevar el nivel del powerlifting nacional.'],
+  ['Visión', 'Ser la federación referente en Centroamérica, reconocida por su excelencia y compromiso con el deporte.'],
+  ['Valores', 'Disciplina, respeto, inclusión, trabajo en equipo y pasión por el powerlifting.'],
+];
+
 export default function WhoWeAreSection() {
-  return (
-    <section className="max-w-5xl mx-auto my-16 px-4 text-center animate-fadeIn">
-      <h2 className="text-3xl md:text-4xl font-bold text-[#FFCC00] mb-4">¿Quiénes Somos?</h2>
-      <p className="text-white/90 text-lg mb-2">
-        En FELPONIC, promovemos el powerlifting y el desarrollo deportivo en Nicaragua. Nuestra misión es impulsar atletas, fomentar la inclusión y fortalecer la comunidad del levantamiento de potencia.
-      </p>
-      <div className="flex flex-col md:flex-row justify-center gap-8 mt-8">
-        <div className="bg-black/30 border border-white/10 rounded-lg p-6 flex-1">
-          <h3 className="text-xl font-semibold text-[#FFCC00] mb-2">Misión</h3>
-          <p className="text-white/80">Formar atletas íntegros, promover valores y elevar el nivel del powerlifting nacional.</p>
-        </div>
-        <div className="bg-black/30 border border-white/10 rounded-lg p-6 flex-1">
-          <h3 className="text-xl font-semibold text-[#FFCC00] mb-2">Visión</h3>
-          <p className="text-white/80">Ser la federación referente en Centroamérica, reconocida por su excelencia y compromiso con el deporte.</p>
-        </div>
-        <div className="bg-black/30 border border-white/10 rounded-lg p-6 flex-1">
-          <h3 className="text-xl font-semibold text-[#FFCC00] mb-2">Valores</h3>
-          <p className="text-white/80">Disciplina, respeto, inclusión, trabajo en equipo y pasión por el powerlifting.</p>
-        </div>
-      </div>
-    </section>
-  );
+  return <section className="home-section grid gap-6 lg:grid-cols-[2fr_3fr] lg:gap-12">
+    <div>
+      <h2 className="section-title">Quiénes somos</h2>
+      <p className="max-w-prose text-white/80">En FELPONIC promovemos el powerlifting y fortalecemos la comunidad del levantamiento de potencia en Nicaragua.</p>
+      <Link to="/acerca-de" className="text-link mt-3 inline-flex min-h-11 items-center">Conocer la federación</Link>
+    </div>
+    <dl className="divide-y divide-white/15">
+      {principles.map(([name, description]) => <div key={name} className="grid gap-1 py-3 first:pt-0 sm:grid-cols-[6rem_1fr]">
+        <dt className="font-semibold text-brand-gold">{name}</dt>
+        <dd className="max-w-prose text-white/80">{description}</dd>
+      </div>)}
+    </dl>
+  </section>;
 }

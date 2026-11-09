@@ -1,8 +1,9 @@
+import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-black/70 border-t border-white/10 backdrop-blur-sm text-gray-200 mt-16">
+    <footer className="bg-black/70 border-t border-white/10 text-gray-200 mt-16">
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Columna 1: Logo y breve */}
         <div className="flex flex-col gap-4">
@@ -27,19 +28,18 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-semibold mb-3 text-[#FFCC00]">Enlaces Rápidos</h3>
           <ul className="text-sm space-y-2 mb-4">
-            <li><a href={import.meta.env.BASE_URL} className="hover:text-[#FFCC00] transition">Inicio</a></li>
-            <li><a href={import.meta.env.BASE_URL + 'registro'} className="hover:text-[#FFCC00] transition">Registro</a></li>
-            <li><a href={import.meta.env.BASE_URL + 'contacto'} className="hover:text-[#FFCC00] transition">Contacto</a></li>
-            <li><a href="https://www.instagram.com/felponic/" target="_blank" rel="noopener noreferrer" className="hover:text-[#FFCC00] transition">Instagram</a></li>
-          </ul>
+            <li><Link to="/" className="inline-flex min-h-11 items-center hover:text-brand-gold">Inicio</Link></li>
+            <li><Link to="/registro" className="inline-flex min-h-11 items-center hover:text-brand-gold">Registro</Link></li>
+            <li><Link to="/contacto" className="inline-flex min-h-11 items-center hover:text-brand-gold">Contacto</Link></li>
+            </ul>
           <div className="flex gap-4">
-            <a href="https://www.facebook.com/felponic/" target="_blank" rel="noopener noreferrer" className="hover:text-[#FFCC00] transition"><Facebook size={20} /></a>
-            <a href="https://www.instagram.com/felponic/" target="_blank" rel="noopener noreferrer" className="hover:text-[#FFCC00] transition"><Instagram size={20} /></a>
-            <a href="https://www.youtube.com/@felponic" target="_blank" rel="noopener noreferrer" className="hover:text-[#FFCC00] transition"><Youtube size={20} /></a>
+            <a href="https://www.facebook.com/felponic/" aria-label="Facebook" target="_blank" rel="noopener noreferrer" className="grid size-11 place-items-center rounded-md hover:text-brand-gold"><Facebook size={20} /></a>
+            <a href="https://www.instagram.com/felponic/" aria-label="Instagram" target="_blank" rel="noopener noreferrer" className="grid size-11 place-items-center rounded-md hover:text-brand-gold"><Instagram size={20} /></a>
+            <a href="https://www.youtube.com/@felponic" aria-label="Youtube" target="_blank" rel="noopener noreferrer" className="grid size-11 place-items-center rounded-md hover:text-brand-gold"><Youtube size={20} /></a>
           </div>
         </div>
       </div>
-      <div className="text-center text-xs text-gray-500 py-4 border-t border-white/10">
+      <div className="text-center text-xs text-white/70 py-4 border-t border-white/10">
         &copy; {new Date().getFullYear()} FELPONIC. Todos los derechos reservados.
       </div>
     </footer>
