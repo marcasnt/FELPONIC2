@@ -8,4 +8,6 @@ Antes de habilitar los formularios, comprueba que ninguna regla de Firestore per
 
 El calendario lee la colección `events`. Las nuevas fechas usan YYYY-MM-DD y las fechas anteriores de formato libre se conservan en el archivo público. Para abrir la inscripción, agrega un enlace HTTPS a la convocatoria y retíralo cuando cierre.
 
+El proyecto original es `felponic-web`. Si cambia el bucket o la app web, configura los valores públicos `VITE_FIREBASE_*` de `.env.example`. Verifica la lectura pública de `events` y del prefijo de fotos antes de publicar. No habilites permisos globales para resolver un error de lectura.
+
 La galería lee `gallery/` y un nivel de álbumes bajo esa carpeta. Conserva permisos de lectura pública para los archivos publicados y limita la creación y eliminación a administradores. Verifica que las reglas existentes acepten la ruta `gallery/{album}/{photo}` antes de publicar álbumes desde el panel. Revisa también que la escritura en `events` solo esté disponible para el equipo autorizado.
