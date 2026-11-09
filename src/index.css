@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root { color-scheme: dark; --brand-gold: #ffcc00; --brand-red: #c51f28; }
+  body { @apply m-0 bg-[#090e1c] text-white antialiased; }
+  :focus-visible { outline: 2px solid var(--brand-gold); outline-offset: 4px; }
+  ::selection { background: var(--brand-gold); color: #111827; }
+}
+
+@layer components {
+  .page-shell { @apply mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 md:py-16; }
+  .page-title { @apply text-balance text-4xl font-extrabold leading-tight tracking-tight text-brand-gold md:text-6xl; }
+  .page-intro { @apply mt-4 max-w-prose text-lg leading-relaxed text-white/[.85]; }
+  .section-title { @apply mb-4 text-balance text-2xl font-bold tracking-tight text-brand-gold md:text-3xl; }
+  .action { @apply inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-full px-5 py-2.5 text-center font-semibold transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-60; }
+  .action-primary { @apply bg-brand-red text-white hover:bg-[#aa1823]; }
+  .action-secondary { @apply border border-brand-gold/60 text-brand-gold hover:bg-brand-gold/10; }
+  .text-link { @apply font-semibold text-brand-gold underline underline-offset-4; }
+  .field { @apply min-h-11 w-full min-w-0 rounded-lg border border-white/30 bg-[#161e30] px-3 py-2 text-base text-white; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

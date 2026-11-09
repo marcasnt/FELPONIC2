@@ -1,20 +1,13 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { formsEnabled, registrationPolicy, useSubmission } from '../data/useSubmission';
 import { Check } from 'lucide-react';
 import CustomSelect from '../components/CustomSelect';
 
+const initialValues = { firstName: '', lastName: '', email: '', phone: '', birthdate: '', gender: '', weight: '', experience: '', gym: '', acceptTerms: false };
+
 const RegisterPage = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    birthdate: '',
-    gender: '',
-    weight: '',
-    experience: '',
-    gym: '',
-    acceptTerms: false
-  });
+  const [formData, setFormData] = useState(initialValues);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target as HTMLInputElement;
@@ -48,31 +41,29 @@ const RegisterPage = () => {
     { value: 'expert', label: 'Experto (5+ años)' }
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real implementation, this would send the form data to a backend
-    console.log('Registration form submitted:', formData);
-    // Show success message (would be implemented with a proper notification system)
-    alert('Registro completado con éxito. Recibirás un correo de confirmación.');
+  const { pending, feedback, submit } = useSubmission('registration');
+  const available = formsEnabled && Boolean(registrationPolicy);
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (await submit(formData)) setFormData(initialValues);
   };
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#FFCC00] text-center">
+    <div className="page-shell">
+      <h1 className="page-title mb-8">
         Registro
       </h1>
       
-      <div className="max-w-4xl mx-auto bg-black/30 backdrop-blur-sm p-6 md:p-8 rounded-xl">
+      <div className="max-w-4xl mx-auto bg-black/30 p-6 md:p-8 rounded-xl">
         <div className="text-white mb-8">
           <h2 className="text-2xl font-bold mb-4">Únete a FELPONIC</h2>
           <p className="text-white/80">
             Completa el siguiente formulario para registrarte como atleta en la Federación de Levantamiento
-            de Potencia de Nicaragua. Una vez enviado, nuestro equipo revisará tu información y te contactará
-            con los siguientes pasos.
+            de Potencia de Nicaragua. La solicitud se enviará a la federación para su revisión.
           </p>
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
+        {available ? <form onSubmit={handleSubmit} aria-busy={pending} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="firstName" className="block text-white mb-2">
@@ -81,11 +72,13 @@ const RegisterPage = () => {
               <input
                 type="text"
                 id="firstName"
+                autoComplete="given-name"
+                maxLength={80}
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="field"
               />
             </div>
             
@@ -96,11 +89,13 @@ const RegisterPage = () => {
               <input
                 type="text"
                 id="lastName"
+                autoComplete="family-name"
+                maxLength={80}
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="field"
               />
             </div>
             
@@ -111,11 +106,13 @@ const RegisterPage = () => {
               <input
                 type="email"
                 id="email"
+                autoComplete="email"
+                maxLength={254}
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="field"
               />
             </div>
             
@@ -126,11 +123,13 @@ const RegisterPage = () => {
               <input
                 type="tel"
                 id="phone"
+                autoComplete="tel"
+                maxLength={40}
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="field"
               />
             </div>
             
@@ -141,11 +140,14 @@ const RegisterPage = () => {
               <input
                 type="date"
                 id="birthdate"
+                autoComplete="bday"
+                min="1900-01-01"
+                max={new Date().toISOString().slice(0, 10)}
                 name="birthdate"
                 value={formData.birthdate}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
+                className="field"
               />
             </div>
             
@@ -171,9 +173,10 @@ const RegisterPage = () => {
                 value={formData.weight}
                 onChange={handleChange}
                 required
-                min="30"
-                max="200"
-                className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
+                min="0.01"
+                max="500"
+                step="0.01"
+                className="field"
               />
             </div>
             
@@ -196,10 +199,12 @@ const RegisterPage = () => {
             <input
               type="text"
               id="gym"
+                autoComplete="organization"
+                maxLength={120}
               name="gym"
               value={formData.gym}
               onChange={handleChange}
-              className="w-full px-4 py-2 rounded bg-white/10 border border-white/20 text-gray-100 focus:outline-none focus:border-[#FFCC00] transition-colors"
+              className="field"
               placeholder="Opcional"
             />
           </div>
@@ -217,20 +222,22 @@ const RegisterPage = () => {
               />
             </div>
             <label htmlFor="acceptTerms" className="ml-3 text-sm text-white/80">
-              Acepto los términos y condiciones de FELPONIC y autorizo el uso de mis datos personales de acuerdo con la política de privacidad.
+              He leído las <a className="text-link" href={registrationPolicy}>condiciones y el aviso de privacidad</a> y acepto el tratamiento de mis datos para esta solicitud.
             </label>
           </div>
           
           <div className="flex justify-center pt-4">
             <button
               type="submit"
-              className="bg-gradient-to-r from-[#FF0000] to-[#FF3300] text-white text-lg font-bold py-3 px-8 rounded-full hover:from-[#FF3300] hover:to-[#FF0000] transition-all duration-300 transform hover:scale-105 flex items-center"
+              disabled={pending}
+              className="action action-primary"
             >
-              Completar Registro
+              {pending ? 'Enviando…' : 'Enviar solicitud'}
               <Check size={20} className="ml-2" />
             </button>
           </div>
-        </form>
+          <div role="status" aria-live="polite" className="text-white/90">{feedback?.message}</div>
+        </form> : <p className="text-white/[.85]">El registro en línea aún no está habilitado. <Link to="/contacto" className="text-link">Consulta los pasos con FELPONIC</Link>.</p>}
       </div>
     </div>
   );

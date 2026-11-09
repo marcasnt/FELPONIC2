@@ -1,6 +1,6 @@
 export default function WhoWeAreSection() {
   return (
-    <section className="max-w-5xl mx-auto my-16 px-4 text-center animate-fadeIn">
+    <section className="max-w-5xl mx-auto my-16 px-4 text-center ">
       <h2 className="text-3xl md:text-4xl font-bold text-[#FFCC00] mb-4">¿Quiénes Somos?</h2>
       <p className="text-white/90 text-lg mb-2">
         En FELPONIC, promovemos el powerlifting y el desarrollo deportivo en Nicaragua. Nuestra misión es impulsar atletas, fomentar la inclusión y fortalecer la comunidad del levantamiento de potencia.

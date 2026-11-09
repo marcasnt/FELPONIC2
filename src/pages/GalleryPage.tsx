@@ -1,113 +1,37 @@
 import { useState } from 'react';
+import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { X } from 'lucide-react';
+import { loadPhotos, usePublicContent, type Photo } from '../data/publicContent';
 
-const GalleryPage = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  // Example gallery images - in a real implementation, these would be from your own server
-  const galleryImages = [
-    {
-      id: 1,
-      src: "https://images.pexels.com/photos/4162451/pexels-photo-4162451.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      alt: "Powerlifter haciendo sentadillas"
-    },
-    {
-      id: 2,
-      src: "https://images.pexels.com/photos/4164761/pexels-photo-4164761.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      alt: "Atleta levantando pesas"
-    },
-    {
-      id: 3,
-      src: "https://images.pexels.com/photos/6456209/pexels-photo-6456209.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      alt: "Competición de powerlifting"
-    },
-    {
-      id: 4,
-      src: "https://images.pexels.com/photos/1229356/pexels-photo-1229356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      alt: "Entrenamiento con pesas"
-    },
-    {
-      id: 5,
-      src: "https://images.pexels.com/photos/4162579/pexels-photo-4162579.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      alt: "Atleta de powerlifting"
-    },
-    {
-      id: 6,
-      src: "https://images.pexels.com/photos/6550851/pexels-photo-6550851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      alt: "Entrenamiento de fuerza"
-    },
-    {
-      id: 7,
-      src: "https://images.pexels.com/photos/28080/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      alt: "Competición de levantamiento"
-    },
-    {
-      id: 8,
-      src: "https://images.pexels.com/photos/949129/pexels-photo-949129.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      alt: "Entrenamiento de powerlifting"
-    }
-  ];
-
-  const openImage = (src: string) => {
-    setSelectedImage(src);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeImage = () => {
-    setSelectedImage(null);
-    document.body.style.overflow = 'auto';
-  };
-
-  return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#FFCC00] text-center">
-        Galería de Fotos
-      </h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {galleryImages.map((image) => (
-          <div 
-            key={image.id} 
-            className="aspect-square overflow-hidden rounded-lg cursor-pointer group relative"
-            onClick={() => openImage(image.src)}
-          >
-            <img 
-              src={image.src} 
-              alt={image.alt} 
-              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <p className="text-white text-center px-4">{image.alt}</p>
-            </div>
+export default function GalleryPage() {
+  const { data, status } = usePublicContent(loadPhotos);
+  const [selected, setSelected] = useState<Photo | null>(null);
+  const albums = [...new Set(data.map(photo => photo.album))];
+  return <div className="page-shell">
+    <h1 className="page-title">Galería de fotos</h1>
+    <p className="page-intro">Imágenes publicadas por FELPONIC.</p>
+    {status === 'loading' && <p role="status" className="mt-10">Cargando fotos…</p>}
+    {status === 'error' && <p role="status" className="mt-10">No pudimos cargar las fotos. Intenta de nuevo más tarde.</p>}
+    {status === 'ready' && !data.length && <p className="mt-10 text-white/80">Aún no hay álbumes publicados.</p>}
+    {albums.map(album => <section className="mt-10" key={album}>
+      <h2 className="section-title">{album}</h2>
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{data.filter(photo => photo.album === album).map(photo => <li key={photo.url}>
+        <button className="block w-full overflow-hidden rounded-lg text-left" onClick={() => setSelected(photo)} aria-label={`Ampliar foto: ${photo.name}`}>
+          <img src={photo.url} alt={photo.name} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+        </button>
+      </li>)}</ul>
+    </section>)}
+    <Dialog open={selected !== null} onClose={() => setSelected(null)} className="relative z-[60]">
+      <div className="fixed inset-0 bg-black/90" aria-hidden />
+      <div className="fixed inset-0 grid place-items-center overflow-auto p-4">
+        <DialogPanel className="w-full max-w-4xl rounded-xl bg-[#101629] p-4">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <DialogTitle className="break-all text-white">{selected?.name}</DialogTitle>
+            <button type="button" autoFocus onClick={() => setSelected(null)} aria-label="Cerrar foto" className="grid size-11 shrink-0 place-items-center rounded-full text-white hover:bg-white/15"><X aria-hidden /></button>
           </div>
-        ))}
+          {selected && <img src={selected.url} alt={selected.name} className="max-h-[72dvh] w-full object-contain" />}
+        </DialogPanel>
       </div>
-
-      {/* Lightbox */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={closeImage}
-        >
-          <button 
-            className="absolute top-4 right-4 bg-[#FF0000] rounded-full p-2 text-white hover:bg-[#FF3300] transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              closeImage();
-            }}
-          >
-            <X size={24} />
-          </button>
-          <img 
-            src={selectedImage} 
-            alt="Enlarged view" 
-            className="max-w-full max-h-[90vh] object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default GalleryPage;
+    </Dialog>
+  </div>;
+}

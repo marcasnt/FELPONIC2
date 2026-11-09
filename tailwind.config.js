@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        brand: { gold: '#ffcc00', red: '#c51f28' },
         felponic: {
           red: '#E50914',
           darkRed: '#C20812',
